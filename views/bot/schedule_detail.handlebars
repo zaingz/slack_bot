@@ -1,0 +1,84 @@
+{{#section 'steps'}}
+  Step 4 of 4
+{{/section}}
+<div class="container">
+  <div class="section">
+    <div class="row">
+      <div class="col s12">
+        <h4 class="center-align">Some Other Things</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+
+    <form id="schedule_form" action="/save_schedule_detail" method="post">
+      <input name="team_cf_id" type="hidden" value="{{team_conf._id}}" />
+      <div class="row">
+        <div class="col s6">
+
+          <div>
+            <select name="timezone" required>
+              <option value="" disabled selected>Select Time Zone</option>
+              {{#each timezones}}
+                <option value="{{key}}">{{value}}</option> 
+              {{/each}} 
+            </select>
+            <label>TimeZone</label>
+          </div>
+
+          <div class="row section">
+            <div class="col s4 ">
+                Time for updates
+            </div>
+            <div class="col s8 input-field">
+              <select name="time" required>
+                <option value="" disabled selected>Select Time for updates</option>
+                {{#each updatetime}}
+                  <option value="{{key}}">{{value}}</option> 
+                {{/each}} 
+              </select>
+              <label>Time</label>
+            </div>
+          </div>
+
+
+          <div class="row section">
+            <div class="col s4 ">
+              Max Hours
+            </div>
+            <div class="col s8 input-field" >
+              <select name="hours" id="hours">
+                <option value="" disabled>Choose your option</option>
+                {{#each m_hours}}
+                  <option {{#compare . ../team_conf.max_hours}}selected{{/compare}} value="{{.}}">{{.}}</option>
+                {{/each}}
+              </select>
+              <label>Max Hours</label>
+            </div>
+          </div>
+          
+          Which days do you want to ask for updates ?
+          <div class="row">
+            {{#each days}}
+              <div class="col s4">
+                <input class="days" name="days[]" type="checkbox" id="{{key}}" value="{{key}}"  {{#includes key ../team_conf.days selected }}checked{{/includes}}/>
+                <label for="{{key}}">{{value}}</label>
+              </div>
+            {{/each}}
+          </div> 
+        </div> 
+      </div>
+
+      <div class="section">
+        <a href="/select_question_set" class="btn waves-effect waves-light left" name="back">Back
+          <i class="material-icons left">skip_previous</i>
+        </a>
+        <button class="btn waves-effect waves-light right" type="submit" name="next">Finish Setup
+        </button>
+        <div class="clear"></div>
+      <div>
+    </form>
+
+  </div>
+</div>

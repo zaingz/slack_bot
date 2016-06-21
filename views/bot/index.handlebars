@@ -1,0 +1,42 @@
+{{#section 'steps'}}
+  Step 1 of 4
+{{/section}}
+<div class="container">
+  <div class="section">
+    <div class="row">
+      <div class="col s12">
+        <h4 class="center-align">Select who will send updates</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+
+    <h5 class="center-align">First select everyone on your team who will be sending daily updates</h4>
+    <form action="/save_users" method="post">
+      <input name="team_cf_id" type="hidden" value="{{team_conf._id}}" />
+      <div class="row">
+        {{#each users}}
+          <div class="col s4">
+            {{team_conf.selected_users}}
+            
+              <input name="users[]" type="checkbox" id="{{id}}" value="{{id}}" {{#includes id ../team_conf.selected_users false }}checked{{/includes}}/>
+              <label for="{{id}}">{{name}}</label>
+            
+          </div>
+        {{/each}}
+      </div>
+
+      <div class="section">
+        <button class="btn waves-effect waves-light left" type="submit" name="back">Back
+          <i class="material-icons left">skip_previous</i>
+        </button>
+        <button class="btn waves-effect waves-light right" type="submit" name="next">Next
+          <i class="material-icons right">skip_next</i>
+        </button>
+        <div class="clear"></div>
+      <div>
+    </form>
+
+  </div>
+</div>

@@ -1,0 +1,40 @@
+{{#section 'steps'}}
+  Step 2 of 4
+{{/section}}
+<div class="container">
+  <div class="section">
+    <div class="row">
+      <div class="col s12">
+        <h4 class="center-align">Select Slack Channels</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h5 class="center-align">Select which of your Slack Channels you will want to post to. Everyone you selected in step 1 if they are posting updates will get the updates posted here (if they are a member of that channel)</h4>
+    <form action="/save_channels" method="post">
+      <input name="team_cf_id" type="hidden" value="{{team_conf._id}}" />
+      <div class="row">
+        {{#each channels}}
+          {{#unless is_archived}}
+          <div class="col s4">
+              <input name="channels[]" type="checkbox" id="{{id}}" value="{{id}}" {{#includes id ../../team_conf.selected_channels false }}checked{{/includes}}/>
+            <label for="{{id}}">{{name}}</label>
+          </div>
+          {{/unless}}
+        {{/each}}
+      </div>
+
+      <div class="section">
+        <a href="/" class="btn waves-effect waves-light left"  name="back">Back
+          <i class="material-icons left">skip_previous</i>
+        </a>
+        <button class="btn waves-effect waves-light right" type="submit" name="next">Next
+          <i class="material-icons right">skip_next</i>
+        </button>
+        <div class="clear"></div>
+      <div>
+    </form>
+
+  </div>
+</div>

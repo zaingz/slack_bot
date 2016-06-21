@@ -1,0 +1,81 @@
+{{#section 'steps'}}
+  Step 3 of 4
+{{/section}}
+<div class="container">
+  <div class="section">
+    <div class="row">
+      <div class="col s12">
+        <h4 class="center-align">What Questions will the Bot ask ?</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+
+    <h5 class="center-align">Choose what questions are asked in the Daily Update</h4>
+    <form action="/save_question_set" method="post">
+      <input name="team_cf_id" type="hidden" value="{{team_conf._id}}" />
+      <div class="row">
+        <div class="col s12">
+          {{#each q_sets}}
+            {{#if custom}}
+              {{#compare team_config ../../team_conf._id}}
+                <input name="q_set" type="radio" id="q_set{{_id}}" value="{{_id}}" {{#compare ../../../team_conf.question_set._id ../../_id }}checked{{/compare}} />
+                <label for="q_set{{_id}}">{{name}}</label>
+                <ul>
+                  {{#each questions}}
+                     <li>{{inc @index}}. {{.}}</li>
+                  {{/each}}
+                </ul>
+              {{/compare}}
+            {{else}}
+              <input name="q_set" type="radio" id="q_set{{_id}}" value="{{_id}}" {{#compare ../../team_conf.question_set._id ../_id }}checked{{/compare}} />
+              <label for="q_set{{_id}}">{{name}}</label>
+              <ul>
+                {{#each questions}}
+                   <li>{{inc @index}}. {{.}}</li>
+                {{/each}}
+              </ul>
+            {{/if}}
+            
+          {{/each}}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s6">
+          <input name="q_set" type="radio" id="custom" value="custom"/>
+          <label for="custom">Custom</label>
+        </div> 
+      </div>
+      
+      <div class="row">
+        <div class="col s6">
+          <div id="questions" class="questions">
+           <div class="input-field">
+              <input name="questions[]" id="question1" type="text" class="validate">
+              <label for="name">Add a question</label>
+            </div> 
+          </div>
+        </div> 
+         
+      </div>
+
+      <div class="row">
+        <div class="col s6">
+          <a class="waves-effect waves-light btn add_question"><i class="material-icons left">add</i>Add another question</a>
+        </div>
+      </div>
+      <div class="section">
+        <a href="/select_channels" class="btn waves-effect waves-light left"  name="back">Back
+          <i class="material-icons left">skip_previous</i>
+        </a>
+        <button class="btn waves-effect waves-light right" type="submit" name="next">Next
+          <i class="material-icons right">skip_next</i>
+        </button>
+        <div class="clear"></div>
+      <div>
+    </form>
+
+  </div>
+</div>
